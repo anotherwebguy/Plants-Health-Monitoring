@@ -5,7 +5,7 @@
 
 #define DHTpin 2
 
-const char* ssid = "ChotaBheem";  
+const char* wifiname = "ChotaBheem";  
 const char* password = "BheemkiShakti";  
 
 DHTesp dht;
@@ -14,13 +14,13 @@ WiFiClient client;
 long myChannelNumber = 1490676;
 const char* myWriteAPIKey = "7OG22WM1EMYNMVTY";
 
-int dryValue = 0;
-int wetValue = 1023;
-int friendlyDryValue = 0;
-int friendlyWetValue = 100;
+int fromLow = 0;
+int fromHigh = 1023;
+int toLow = 0;
+int toHigh = 100;
 
 const int analogpin = A0;  // Analog input pin that the soil moisture sensor is attached to
-int sensorValueA;         // store sensor input value
+int sensorValueFromA;         // store sensor input value
 
 void setup() {
   // put your setup code here, to run once:
@@ -32,7 +32,7 @@ void setup() {
   Serial.println();  
   Serial.print("Connecting to ");  
   Serial.println(ssid);  
-  WiFi.begin(ssid, password);  
+  WiFi.begin(wifiname, password);  
   while (WiFi.status() != WL_CONNECTED)  
   {  
    delay(500);  
@@ -53,16 +53,16 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  sensorValueA = analogRead(analogpin); //Soil moisture value.
+  sensorValueFromA = analogRead(analogpin); //Soil moisture value.
     
   float humidity = dht.getHumidity();   //humidity
   float temperature = dht.getTemperature(); //temperature
   
-  int friendlyValue = map(sensorValueA , dryValue, wetValue, friendlyDryValue, friendlyWetValue);  
+  int moistureValue = map(sensorValueA , fromLow, fromHigh, toLow, toHigh);  
   //Uploading to thingspeak
   ThingSpeak.setField(1, temperature);
   ThingSpeak.setField(2, humidity);
-  ThingSpeak.setField(3, abs(friendlyValue-100));
+  ThingSpeak.setField(3, abs(moistureValue-100));
   ThingSpeak.writeFields(myChannelNumber ,myWriteAPIKey);        
   delay(300); 
 
