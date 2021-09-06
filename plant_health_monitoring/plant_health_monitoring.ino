@@ -1,18 +1,20 @@
 #include <ESP8266WiFi.h>  
 #include <WiFiClient.h>  
 #include <ThingSpeak.h>  
-#include "DHTesp.h"
+#include "DHT.h"
 
-#define DHTpin 2
+#define DHTpin 0
+#define DHTTYPE DHT11
+
+DHT dht(DHTpin,DHTTYPE);
 
 const char* wifiname = "ChotaBheem";  
-const char* password = "BheemkiShakti";  
+const char* password = "ChotaBheemInEveryDayLife";  
 
-DHTesp dht;
 WiFiClient client;  
 
 long myChannelNumber = 1490676;
-const char* myWriteAPIKey = "7OG22WM1EMYNMVTY";
+const char* myWriteAPIKey = "1234567890987654321";
 
 int fromLow = 0;
 int fromHigh = 1023;
@@ -24,14 +26,15 @@ int sensorValueFromA;         // store sensor input value
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(115200); 
+  Serial.begin(9600); 
+  dht.begin();
   // pinMode(analogpin, INPUT);  
   delay(10);  
   // Connect to WiFi network  
   Serial.println();  
   Serial.println();  
   Serial.print("Connecting to ");  
-  Serial.println(ssid);  
+  Serial.println(wifiname);  
   WiFi.begin(wifiname, password);  
   while (WiFi.status() != WL_CONNECTED)  
   {  
@@ -44,8 +47,6 @@ void setup() {
   Serial.println(WiFi.localIP()); 
   
   pinMode(analogpin, INPUT); 
-  
-  dht.setup(DHTpin, DHTesp::DHT11); //for DHT11 Connect DHT sensor to pin 2 
    
   ThingSpeak.begin(client);
 
@@ -54,16 +55,34 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   sensorValueFromA = analogRead(analogpin); //Soil moisture value.
-    
-  float humidity = dht.getHumidity();   //humidity
-  float temperature = dht.getTemperature(); //temperature
-  
-  int moistureValue = map(sensorValueA , fromLow, fromHigh, toLow, toHigh);  
-  //Uploading to thingspeak
+  delay(500);
+  float humidity = dht.readHumidity();   //humidity
+  Serial.print(dht.readHumidity());
+  delay(500);
+  float temperature = dht.readTemperature(); //temperature
+  if(isnan(temperature)){
+     temperature=0;
+  }
+  if(isnan(humidity)){
+    humidity=0;
+  }
+  float percentage = (100.00 - ( (sensorValueFromA/1023.00) * 100.00 ) );
+  if(percentage<0){
+    percentage=0;
+  }
+  Serial.print("Current humidity = ");
+  Serial.print(humidity);
+  Serial.print("%  ");
+  Serial.print("temperature = ");
+  Serial.print(temperature); 
+  Serial.println("C  ");
+  Serial.print("Moisture = ");
+  Serial.print(percentage); 
+  Serial.println("%  ");
   ThingSpeak.setField(1, temperature);
   ThingSpeak.setField(2, humidity);
-  ThingSpeak.setField(3, abs(moistureValue-100));
+  ThingSpeak.setField(3, abs(percentage));
   ThingSpeak.writeFields(myChannelNumber ,myWriteAPIKey);        
-  delay(300); 
+  delay(1000); 
 
 }
