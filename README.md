@@ -50,3 +50,7 @@ The following hardware components were used in IOT devices:
 </div>
 
 ## License
+Distributed under the GPL-3.0 License. [LICENSE](https://github.com/AvdhootJadhav/Plants-Health-Monitoring/blob/main/LICENSE)
+
+## Contributors
+<a href="https://github.com/AvdhootJadhav/Plants-Health-Monitoring/graphs/contributors"> <img src="https://contrib.rocks/image?repo=AvdhootJadhav/Plants-Health-Monitoring" />
