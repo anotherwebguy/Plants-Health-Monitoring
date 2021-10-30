@@ -20,7 +20,7 @@
 ### List of Contents
   - [Introduction](#introduction)
   - [Components](#components)
-  - [Tools & Languages](#tools)
+  - [Tools](#tools)
   - [Screeshots](#screenshots)
 
 ## Introduction
@@ -34,7 +34,7 @@ The following hardware components were used in IOT devices:
   - Breadboard
   - Jumper wires
 
-## Tools & Languages
+## Tools
 <div align="center">
   <img src="https://img.shields.io/badge/Arduino_IDE-00979D?style=for-the-badge&logo=arduino&logoColor=white">
   <img src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white">
