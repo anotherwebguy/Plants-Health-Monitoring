@@ -20,7 +20,8 @@
 ### List of Contents
   - [Introduction](#introduction)
   - [Components](#components)
-  - [Tools](#tools)
+  - [Tools & Languages](#tools)
+  - [Screeshots](#screenshots)
 
 ## Introduction
 In earlier years, people used to test their soil by sending a sample of their soil to a laboratory and then waiting for results. As the test centers were far away from their village, they had to travel long distance for it. This not only exhausts energy but also consumes lot of time. As the years went by, the test centers came closer and closer to villagers but it cannot be afforded by everyone. So a easy to use, cheap and low maintainence method was required so that everyone can afford it and grow more and more crops. So our project focuses on building an IOT device which takes less space and can measure soil moisture, temperature and humidity levels accurately which can be used by farmers to plan which crop to grow.
@@ -40,3 +41,12 @@ The following hardware components were used in IOT devices:
 </div>
 
 ## Screenshots
+<div align="center">
+  <img src="https://github.com/AvdhootJadhav/Plants-Health-Monitoring/blob/main/plant_health_monitoring/iot.jpeg">
+  <br><br>
+  <img src="https://github.com/AvdhootJadhav/Plants-Health-Monitoring/blob/main/plant_health_monitoring/arduino.png">
+  <br><br>
+  <img src="https://github.com/AvdhootJadhav/Plants-Health-Monitoring/blob/main/plant_health_monitoring/thingspeak.png">
+</div>
+
+## License
