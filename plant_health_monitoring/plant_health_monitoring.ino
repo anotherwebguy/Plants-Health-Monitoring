@@ -1,3 +1,4 @@
+
 #include <ESP8266WiFi.h>  
 #include <WiFiClient.h>  
 #include <ThingSpeak.h>  
@@ -8,13 +9,13 @@
 
 DHT dht(DHTpin,DHTTYPE);
 
-const char* wifiname = "ChotaBheem";  
-const char* password = "ChotaBheemInEveryDayLife";  
+const char* wifiname = "redmi";  
+const char* password = "22222222";  
 
 WiFiClient client;  
 
 long myChannelNumber = 1490676;
-const char* myWriteAPIKey = "1234567890987654321";
+const char* myWriteAPIKey = "7OG22WM1EMYNMVTY";
 
 int fromLow = 0;
 int fromHigh = 1023;
